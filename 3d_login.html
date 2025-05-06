@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Reporting System Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(120deg, #671db6, #2575fc);
+      overflow: hidden;
+      perspective: 1000px; /* Enables 3D perspective */
+    }
+
+    .login-container {
+      transform-style: preserve-3d;
+      animation: rotate 15s infinite linear; /* Rotating animation */
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 30px;
+      width: 350px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      text-align: center;
+      transform: rotateY(25deg); /* Adds initial 3D tilt */
+      transition: transform 0.5s ease;
+    }
+
+    .login-box:hover {
+      transform: rotateY(0deg); /* Resets on hover */
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px 0;
+      border: none;
+      border-bottom: 2px solid #333;
+      outline: none;
+      background: transparent;
+    }
+
+    .input-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transition: 0.5s;
+      color: #999;
+    }
+
+    .input-box input:focus ~ label,
+    .input-box input:valid ~ label {
+      top: -20px;
+      color: #2575fc;
+      font-size: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #2575fc;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #6a11cb;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>College Reporting System</h2>
+      <form>
+        <div class="input-box">
+          <input type="text" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <input type="password" required>
+          <label>Password</label>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.querySelector('.login-box').addEventListener('mousemove', (e) => {
+      const box = e.target.closest('.login-box');
+      const { offsetX, offsetY, offsetWidth, offsetHeight } = box;
+      const xAxis = ((offsetX / offsetWidth) - 0.5) * 30; // Adjust rotation scale
+      const yAxis = ((offsetY / offsetHeight) - 0.5) * -30;
+
+      box.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    document.querySelector('.login-box').addEventListener('mouseleave', () => {
+      const box = document.querySelector('.login-box');
+      box.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  </script>
+</body>
+</html>
